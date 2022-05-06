@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DasboardAuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     use StorageImageTrait;
 
     protected $post;
@@ -42,23 +37,14 @@ class DasboardAuthorController extends Controller
         return view('backend.post_author.index', compact('posts', 'user', 'postOfUser'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $topics = $this->topic->all();
         return view('backend.post_author.create', compact('topics'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request, $id = 0)
     {
         $post = [
@@ -84,23 +70,13 @@ class DasboardAuthorController extends Controller
         return redirect()->route('admin.author.home', compact('postOfUser'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $topics = $this->topic->all();
@@ -108,13 +84,6 @@ class DasboardAuthorController extends Controller
         return view('backend.post_author.edit', compact('topics', 'posts'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $post = [
@@ -137,12 +106,7 @@ class DasboardAuthorController extends Controller
         return redirect()->route('admin.author.home', compact('posts'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         post::find($id)->delete();

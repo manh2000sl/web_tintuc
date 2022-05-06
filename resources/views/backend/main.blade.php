@@ -83,9 +83,7 @@
     $(function () {
         // Summernote
         $('#summernote').summernote()
-        // CKEDITOR.replace('my-editor', options);
 
-        // CodeMirror
     })
 </script>
 <script>

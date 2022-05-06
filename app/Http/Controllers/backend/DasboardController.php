@@ -170,11 +170,11 @@ class DasboardController extends Controller
         $post1 = Post::find($id);
         if (!empty($request->r4)) {
             //duyệt lấy key và value của request
-            foreach ($request->r4 as $comment_id =>$comment_status) {
+            foreach ($request->r4 as $comment_id => $comment_status) {
                 $comment_status = [
                     'status' => $comment_status
                 ];
-             Comment::where(['post_id' => $post1->id],[ 'parent_id' => 0])->where('id', $comment_id)->update($comment_status);
+                Comment::where(['post_id' => $post1->id], ['parent_id' => 0])->where('id', $comment_id)->update($comment_status);
             }
         }
         $post = Post::find($id)->update($post);
@@ -184,8 +184,8 @@ class DasboardController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-       Comment::where(['post_id' => $post->id])->delete();
-       Post::find($id)->delete();
+        Comment::where(['post_id' => $post->id])->delete();
+        Post::find($id)->delete();
         User::where('id', $id)->delete();
         Topic::where('id', $id)->delete();
         return redirect()->route('admin.home');

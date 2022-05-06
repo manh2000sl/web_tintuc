@@ -20,9 +20,10 @@ class TopicController extends Controller
         $this->topic = $topic;
         $this->post = $post;
     }
+
     public function index()
     {
-        $topics = Topic::orderby('id','desc')->get();
+        $topics = Topic::orderby('id', 'desc')->get();
         return view('backend.topic.index', compact('topics'));
     }
 
@@ -35,7 +36,7 @@ class TopicController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +52,7 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,28 +63,27 @@ class TopicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
-        $topic=topic::find($id);
-        return view('backend.topic.edit',compact('topic'));
+        $topic = topic::find($id);
+        return view('backend.topic.edit', compact('topic'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         topic::find($id)->update([
             'name' => $request->InputTitle,
-            'slug' =>$request->convert_slug,
+            'slug' => $request->convert_slug,
         ]);
         return redirect()->route('admin.topic');
     }
@@ -91,13 +91,13 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         topic::find($id)->delete();
-        post::where('topic',$id)->delete();
+        post::where('topic', $id)->delete();
         return redirect()->route('admin.topic');
     }
 }
