@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content_left')
-    @if(empty($postOfIds))\
+    @if(empty($postOfIds))
     <div class="container">
         <div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div class="f2-s-1 p-r-30 m-tb-6">
@@ -18,12 +18,6 @@
                 <a class="breadcrumb-item f1-s-3 cl9">
                     Blog
                 </a>
-            </div>
-            <div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">
-                <button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                    <i class="zmdi zmdi-search"></i>
-                </button>
             </div>
         </div>
     </div>'
@@ -64,11 +58,11 @@
                             </div>
 
                             <p class="f1-s-1 cl6 p-b-24">
-                                Duis eu felis id tortor congue consequat. Sed vitae vestibulum enim, et pharetra magna
+                                {{$post->summary}}
                             </p>
 
                             <a href="{{route('index.detail',['slug'=>$post->slug])}}" class="f1-s-1 cl9 hov-cl10 trans-03">
-                                Read More
+                                Xem thêm
                                 <i class="m-l-2 fa fa-long-arrow-alt-right"></i>
                             </a>
                         </div>

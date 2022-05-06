@@ -49,10 +49,12 @@ class HomePageController extends Controller
     public function detail($slug)
     {
         $post = Post::where('slug', '=', $slug)->with('toTopic')->first();
-         $comment1 = $post->comments()->where('status', '=', '1')->with('user')->orderBy('id', 'desc')->get();
+        $comment1=[];
+        if (!empty($post)) {
+            $comment1 = $post->comments()->where('status', '=', '1')->with('user')->orderBy('id', 'desc')->get();
+        }
         return view('frontend.post_detail', compact( 'post','comment1'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -75,7 +77,7 @@ class HomePageController extends Controller
         $topics_1 = Topic::where('slug', '=', $slug)->first();
 //        $postOfIds = $topics_1->Post()->where('status', '=', '1')->orderBy('id', 'desc')->get();
         //xem lại //////////////////////////////////////////////////////////////////////////////
-        $postOfIds = [];
+        $postOfIds=[];
         if (!empty($topics_1)) {
             $postOfIds = Post::where('topic', $topics_1->id)->where('status', '=', '1')->orderBy('id', 'desc')->get();
         }
