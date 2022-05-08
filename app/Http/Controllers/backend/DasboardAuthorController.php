@@ -64,7 +64,7 @@ class DasboardAuthorController extends Controller
         if ($id == 0) {
             $id = Auth::user()->id;
         }
-        $user = $this->user->find($id);
+        $user = $this->user->where('id',$id);
         $posts = $this->post->all();
         $postOfUser = $user->postUser;
         return redirect()->route('admin.author.home', compact('postOfUser'));
@@ -79,7 +79,7 @@ class DasboardAuthorController extends Controller
 
     public function edit($id)
     {
-        $topics = $this->topic->all();
+        $topics = $this->topic->get();
         $posts = $this->post->find($id);
         return view('backend.post_author.edit', compact('topics', 'posts'));
     }
@@ -100,7 +100,7 @@ class DasboardAuthorController extends Controller
             $post['image'] = $data['fileName'];
             $post['image_path'] = $data['filePath'];
         }
-        post::find($id)->update($post);
+        post::where('id',$id)->update($post);
         $posts = post::get();
 
         return redirect()->route('admin.author.home', compact('posts'));
@@ -109,9 +109,7 @@ class DasboardAuthorController extends Controller
 
     public function destroy($id)
     {
-        post::find($id)->delete();
-        user::where('id', $id)->delete();
-        topic::where('id', $id)->delete();
+        post::where('id', $id)->delete();
         return view('backend.post_author.index');
     }
 

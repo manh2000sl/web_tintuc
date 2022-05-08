@@ -104,27 +104,26 @@
                                                 <label class="form-check-label" for="InputFile"> Hiển thị lên màn
                                                     hình </label>
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r1" name="r1"
+                                                <input type="radio" class="form-check-input" id="r1" name="status"
                                                        {{$posts->status==1?'checked':''}} value="1">có
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r1" name="r1"
+                                                <input type="radio" class="form-check-input" id="r1" name="status"
                                                        {{$posts->status==0?'checked':''}} value="0">không
                                             </div>
                                             <div class="form-check">
                                                 <label class="form-check-label" for="InputFile"> Hiển thị lên trang nổi
                                                     bật </label>
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r2" name="r2"
+                                                <input type="radio" class="form-check-input" id="r2" name="highlight"
                                                        {{$posts->highlight==1?'checked':''}} value="1">có
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r2" name="r2"
+                                                <input type="radio" class="form-check-input" id="r2" name="highlight"
                                                        {{$posts->highlight==0?'checked':''}} value="0">không
                                             </div>
 
                                             <br>
                                             {{--            edit comment                                ////////////////////////////////////////--}}
                                             <h1>Duyệt bình luận</h1>
-
                                             @foreach($comments as $comment)
                                                 <div class="media pt-4 ">
                                                     <a class="pull_left mr-3" href="#">
@@ -140,14 +139,16 @@
                                                             <label class="form-check-label" for="InputFile"> Hiển thị
                                                                 lên màn hình </label>
                                                             <br>
-                                                            <input type="radio" class="form-check-input btn_khong"
-                                                                   id="r3-{{$comment->id}}"
-                                                                   name="r4[{{$comment->id}}]"
+                                                            <input type="radio" class="form-check-input btn_khong check-input-comment"
+                                                                   data-id="{{$comment->id}}"
+                                                                   id="r3"
+                                                                   name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==0?'checked':''}} value="0">không
                                                             <br>
-                                                            <input type="radio" class="form-check-input btn_co"
+                                                            <input type="radio" class="form-check-input btn_co check-input-comment"
                                                                    id="r4-{{$comment->id}}"
-                                                                   name="r4[{{$comment->id}}]"
+                                                                   data-id="{{$comment->id}}"
+                                                                   name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==1?'checked':''}} value="1">có
                                                             <br>
                                                         </div>
@@ -190,5 +191,28 @@
     </div>
 @stop()
 @push('js')
+{{--    <script type="text/javascript">--}}
+{{--   --}}
+{{--        var _csrf = '{{csrf_token()}}';--}}
+{{--        $('.check-input-comment').click(function (e){--}}
+{{--            e.preventDefault();--}}
+{{--            var id = $(this).data('id');--}}
+{{--            var status1 = $('input[type="radio"]:checked').val();--}}
+{{--            alert(status1);--}}
+{{--            $.ajax({--}}
+{{--                url: "{{route('admin.comment')}}",--}}
+{{--                type: "post",--}}
+{{--                dataType: "json",--}}
+{{--                data: {--}}
+{{--                    status1: status1,--}}
+{{--                },--}}
+{{--                success: function (result) {--}}
+{{--                    alert(result);--}}
+{{--                }--}}
+{{--            })--}}
+{{--        })--}}
+
+
+    </script>
 
 @endpush

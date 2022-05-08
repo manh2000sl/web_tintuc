@@ -23,7 +23,7 @@ Route::prefix('admin')->group(function (){
     Route::get('edit/{id}', [DasboardController::class, 'edit'])->name('admin.edit');
     Route::put('update/{id}', [DasboardController::class, 'update'])->name('admin.update');
     Route::delete('destroy/{id}', [DasboardController::class, 'destroy'])->name('admin.destroy');
-    Route::get('search', [DasboardController::class, 'search'])->name('admin.search');
+    Route::post('comment', [DasboardController::class, 'comment'])->name('admin.comment');
 
 });
 //danh mục
@@ -36,13 +36,6 @@ Route::prefix('admin/topic')->group(function () {
     Route::delete('destroy/{id}', [TopicController::class, 'destroy'])->name('admin.topic.destroy')->middleware('can:delete_topic');
 });
 Auth::routes();
-
-//Route::prefix('admin/author')->group(function (){
-//    Route::get('/', [DasboardController::class, 'index'/*,'middleware'=>'can:user-list'*/])->name('admin.home');
-//    Route::get('create', [DasboardController::class, 'create'])->name('admin.create');
-//    Route::get('edit', [DasboardController::class, 'edit'])->name('admin.edit');
-//});
-//user
 Route::prefix('admin/user')->group(function (){
     Route::get('/', [AdminUserController::class, 'index'])->name('admin.user');
     Route::get('create', [AdminUserController::class, 'create'])->name('admin.user.create')->middleware('can:add_user');

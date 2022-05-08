@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Validator;
 class AdminUserController extends Controller
 {
 
-//    /**
-//     * Display a listing of the resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
     public function __construct(User $user, Role $role, Post $post)
     {
         $this->user = $user;
@@ -28,27 +23,16 @@ class AdminUserController extends Controller
 
     public function index()
     {
-        $users = $this->user->all();
+        $users = $this->user->get();
         return view('backend.User_Admin.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = $this->role->all();
         return view('backend.User_Admin.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
-     */
     public function store(Request $request)
     {
         ///////----------Validator--------///////
@@ -90,62 +74,32 @@ class AdminUserController extends Controller
         return redirect()->route('admin.user');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $roles = $this->role->get();
-        $user = $this->user->find($id);
+        $roles = Role::get();
+        $user = User::find($id);
         $roleOfUser = $user->roles;
 
-        return view('backend.User_Admin.edit', compact('roles', 'user', 'roleOfUser'));
+        return view('backend.User_Admin.edit', compact( 'user', 'roleOfUser','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        user::find($id)->update([
+        user::where('id',$id)->update([
             'name' => $request->InputName,
             'password' => Hash::make($request->InputPass),
             'email' => $request->InputEmail,
         ]);
-        $user = user::find($id);
+        $user = user::where('id',$id);
         $user->roles()->sync($request->Role_Id);
         return redirect()->route('admin.user');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
 
-        $user = user::find($id);
-
+        user::where('id',$id);
         return redirect()->route('admin.user');
     }
 }
