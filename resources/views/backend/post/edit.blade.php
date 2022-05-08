@@ -104,20 +104,20 @@
                                                 <label class="form-check-label" for="InputFile"> Hiển thị lên màn
                                                     hình </label>
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r1" name="status"
+                                                <input type="radio" class="form-check-input"  name="status"
                                                        {{$posts->status==1?'checked':''}} value="1">có
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r1" name="status"
+                                                <input type="radio" class="form-check-input"  name="status"
                                                        {{$posts->status==0?'checked':''}} value="0">không
                                             </div>
                                             <div class="form-check">
                                                 <label class="form-check-label" for="InputFile"> Hiển thị lên trang nổi
                                                     bật </label>
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r2" name="highlight"
+                                                <input type="radio" class="form-check-input" name="highlight"
                                                        {{$posts->highlight==1?'checked':''}} value="1">có
                                                 <br>
-                                                <input type="radio" class="form-check-input" id="r2" name="highlight"
+                                                <input type="radio" class="form-check-input"  name="highlight"
                                                        {{$posts->highlight==0?'checked':''}} value="0">không
                                             </div>
 
@@ -141,12 +141,12 @@
                                                             <br>
                                                             <input type="radio" class="form-check-input btn_khong check-input-comment"
                                                                    data-id="{{$comment->id}}"
-                                                                   id="r3"
+
                                                                    name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==0?'checked':''}} value="0">không
                                                             <br>
                                                             <input type="radio" class="form-check-input btn_co check-input-comment"
-                                                                   id="r4-{{$comment->id}}"
+
                                                                    data-id="{{$comment->id}}"
                                                                    name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==1?'checked':''}} value="1">có
