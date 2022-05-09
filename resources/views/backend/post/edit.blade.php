@@ -139,13 +139,13 @@
                                                             <label class="form-check-label" for="InputFile"> Hiển thị
                                                                 lên màn hình </label>
                                                             <br>
-                                                            <input type="radio" class="form-check-input btn_khong check-input-comment"
+                                                            <input type="radio" class="form-check-input  check-input-comment"
                                                                    data-id="{{$comment->id}}"
 
                                                                    name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==0?'checked':''}} value="0">không
                                                             <br>
-                                                            <input type="radio" class="form-check-input btn_co check-input-comment"
+                                                            <input type="radio" class="form-check-input  check-input-comment"
 
                                                                    data-id="{{$comment->id}}"
                                                                    name="status_comment[{{$comment->id}}]"
@@ -192,19 +192,20 @@
 @stop()
 @push('js')
 {{--    <script type="text/javascript">--}}
-{{--   --}}
+
 {{--        var _csrf = '{{csrf_token()}}';--}}
 {{--        $('.check-input-comment').click(function (e){--}}
 {{--            e.preventDefault();--}}
 {{--            var id = $(this).data('id');--}}
-{{--            var status1 = $('input[type="radio"]:checked').val();--}}
-{{--            alert(status1);--}}
+{{--            var status = $("[type='radio']:checked").val();--}}
+{{--            alert(status);--}}
 {{--            $.ajax({--}}
 {{--                url: "{{route('admin.comment')}}",--}}
 {{--                type: "post",--}}
 {{--                dataType: "json",--}}
 {{--                data: {--}}
-{{--                    status1: status1,--}}
+{{--                    status: status,--}}
+{{--                    _token: _csrf,--}}
 {{--                },--}}
 {{--                success: function (result) {--}}
 {{--                    alert(result);--}}
