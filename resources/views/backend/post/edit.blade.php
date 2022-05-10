@@ -141,14 +141,14 @@
                                                             <br>
                                                             <input type="radio" class="form-check-input btn_khong"
                                                                    onchange="approve_comment({{$comment->id}},0)"
-                                                                   id="r3-{{$comment->id}}"
-                                                                   name="r4[{{$comment->id}}]"
+                                                                   id="status-comment-an-{{$comment->id}}"
+                                                                   name="status-[{{$comment->id}}]"
                                                                    {{$comment->status==0?'checked':''}} value="0">không
                                                             <br>
                                                             <input type="radio" class="form-check-input btn_co"
                                                                    onchange="approve_comment({{$comment->id}},1)"
-                                                                   id="r4-{{$comment->id}}"
-                                                                   name="r4[{{$comment->id}}]"
+                                                                   id="status-comment-hien-{{$comment->id}}"
+                                                                   name="status-[{{$comment->id}}]"
                                                                    {{$comment->status==1?'checked':''}} value="1">có
                                                             <br>
                                                         </div>

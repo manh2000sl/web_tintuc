@@ -83,26 +83,26 @@ class DasboardController extends Controller
     {
         ///////----------Validator--------///////
         $roles = [
-            'input_title'      => 'bail|required|max:255|min:20',
-            'convert_slug'     => 'required',
+            'input_title' => 'bail|required|max:255|min:20',
+            'convert_slug' => 'required',
             'exampleInputFile' => 'required',
-            'summernote'       => 'required',
-            'summernote2'      => 'required',
+            'summernote' => 'required',
+            'summernote2' => 'required',
         ];
         $messages = [
-            'required'     => ':attribute không được để trống',
-            'max'          => ':attribute không được quá 255 kí tự',
-            'min'          => ':attribute không được ngắn hơn 20 kí tự',
+            'required' => ':attribute không được để trống',
+            'max' => ':attribute không được quá 255 kí tự',
+            'min' => ':attribute không được ngắn hơn 20 kí tự',
             'unique:posts' => 'Chỉ được chọn 1 :attribute',
 
         ];
         $attributes = [
-            'input_title'      => 'Tiêu đề',
-            'convert_slug'     => 'slug',
-            'input_topic'      => 'Danh mục',
+            'input_title' => 'Tiêu đề',
+            'convert_slug' => 'slug',
+            'input_topic' => 'Danh mục',
             'exampleInputFile' => 'Ảnh',
-            'summernote2'      => 'Nội dung',
-            'summernote'       => 'Tóm tắt',
+            'summernote2' => 'Nội dung',
+            'summernote' => 'Tóm tắt',
         ];
         $validator = Validator::make($request->all(), $roles, $messages, $attributes);
         if ($validator->fails()) {
@@ -113,9 +113,9 @@ class DasboardController extends Controller
 
         /////////////////////////////////////////////////
         $post = [
-            'title'   => $request->input_title,
-            'slug'    => $request->convert_slug,
-            'topic'   => $request->input_topic,
+            'title' => $request->input_title,
+            'slug' => $request->convert_slug,
+            'topic' => $request->input_topic,
             'summary' => $request->summernote,
             'content' => $request->summernote2,
             'user_id' => auth()->id(),
@@ -145,12 +145,12 @@ class DasboardController extends Controller
     public function update(Request $request, $id)
     {
         $post = [
-            'title'     => $request->input_title,
-            'slug'      => $request->convert_slug,
-            'topic'     => $request->input_topic,
-            'summary'   => $request->summernote,
-            'content'   => $request->summernote2,
-            'status'    => $request->status,
+            'title' => $request->input_title,
+            'slug' => $request->convert_slug,
+            'topic' => $request->input_topic,
+            'summary' => $request->summernote,
+            'content' => $request->summernote2,
+            'status' => $request->status,
             'highlight' => $request->highlight,
         ];
         $data = $this->storageTraitUpload($request, 'exampleInputFile', 'post');
@@ -177,16 +177,6 @@ class DasboardController extends Controller
         Post::where('id', $id)->delete();
         return redirect()->route('admin.home');
     }
-//    public function comment(Request $request, $id)
-//    {
-//        $comments = [
-//            'status' => $request->status1,
-//            ];
-//       $comment = Comment::where('id',$id)->update($comments);
-//
-//       return  view('frontend.list_comment', compact('comment'));
-//    }
-
 
     public function approveComment(Request $request)
     {
@@ -198,12 +188,12 @@ class DasboardController extends Controller
             ];
             Comment::where('id', $comment_id)->update($comment_status);
             return response()->json([
-                'status'  => 1,
+                'status' => 1,
                 'message' => "Cập nhật trạng thái thành công"
             ]);
         } catch (\Exception $exception) {
             return response()->json([
-                'status'  => 0,
+                'status' => 0,
                 'message' => "Có lỗi xảy ra trong quá trình cập nhật. Vui lòng thử lại sau"
             ]);
         }
