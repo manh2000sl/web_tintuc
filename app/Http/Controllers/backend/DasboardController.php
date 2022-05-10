@@ -83,7 +83,7 @@ class DasboardController extends Controller
     {
         ///////----------Validator--------///////
         $roles = [
-            'input_title'       => 'bail|required|max:255|min:20',
+            'input_title'      => 'bail|required|max:255|min:20',
             'convert_slug'     => 'required',
             'exampleInputFile' => 'required',
             'summernote'       => 'required',
@@ -97,7 +97,7 @@ class DasboardController extends Controller
 
         ];
         $attributes = [
-            'input_title'       => 'Tiêu đề',
+            'input_title'      => 'Tiêu đề',
             'convert_slug'     => 'slug',
             'input_topic'      => 'Danh mục',
             'exampleInputFile' => 'Ảnh',
@@ -134,10 +134,14 @@ class DasboardController extends Controller
     {
         $topics = Topic::get();
         $posts = Post::find($id);
+        if (empty($posts)) {
+            return redirect()->route('admin.home')->withErrors('Bài viết không tồn tại');
+        }
         $topicsOfPost = $posts->toTopic;
         $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('backend.post.edit', compact('topics', 'posts', 'topicsOfPost', 'comments'));
     }
+
     public function update(Request $request, $id)
     {
         $post = [
@@ -163,14 +167,14 @@ class DasboardController extends Controller
                 Comment::where('id', $comment_id)->update($comment_status);
             }
         }
-        $post = Post::where('id',$id)->update($post);
+        $post = Post::where('id', $id)->update($post);
         return redirect()->route('admin.home', compact('post'));
     }
 
     public function destroy($id)
     {
         Comment::where(['post_id' => $id])->delete();
-        Post::where('id',$id)->delete()
+        Post::where('id', $id)->delete();
         return redirect()->route('admin.home');
     }
 //    public function comment(Request $request, $id)

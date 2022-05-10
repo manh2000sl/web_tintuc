@@ -41,6 +41,7 @@ class ajaxLoginController extends Controller
 
         if (Comment::create($data)) {
             $comments = Comment::where(['post_id' => $post])->where(['parent_id' => 0])->where('status','=', 1)->orderBy('id', 'desc')->get();
+
             return view('frontend.list_comment', compact('comments'));
         }
     }
