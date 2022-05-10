@@ -64,10 +64,7 @@ class DasboardAuthorController extends Controller
         if ($id == 0) {
             $id = Auth::user()->id;
         }
-        $user = $this->user->where('id',$id);
-        $posts = $this->post->all();
-        $postOfUser = $user->postUser;
-        return redirect()->route('admin.author.home', compact('postOfUser'));
+        return redirect()->route('admin.author.home');
     }
 
 
@@ -101,9 +98,9 @@ class DasboardAuthorController extends Controller
             $post['image_path'] = $data['filePath'];
         }
         post::where('id',$id)->update($post);
-        $posts = post::get();
 
-        return redirect()->route('admin.author.home', compact('posts'));
+
+        return redirect()->route('admin.author.home');
     }
 
 

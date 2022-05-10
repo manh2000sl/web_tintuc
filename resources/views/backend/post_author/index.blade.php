@@ -94,16 +94,19 @@
                                     </tbody>
                                 </table>
                             </div>
+{{--                            <div class="clearfix">--}}
+{{--                                {{$postOfUser->links()}}--}}
+{{--                            </div>--}}
                             <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-md m-0 float-left">
-                                    <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
-                            </div>
+{{--                            <div class="card-footer clearfix">--}}
+{{--                                <ul class="pagination pagination-md m-0 float-left">--}}
+{{--                                    <li class="page-item"><a class="page-link" href="#">«</a></li>--}}
+{{--                                    <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
+{{--                                    <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+{{--                                    <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+{{--                                    <li class="page-item"><a class="page-link" href="#">»</a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
                         </div>
                         <!-- /.card -->
                     </div>

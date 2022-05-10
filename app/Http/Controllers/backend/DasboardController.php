@@ -146,7 +146,7 @@ class DasboardController extends Controller
         $topics = Topic::get();
         $posts = Post::find($id);
         $topicsOfPost = $posts->toTopic;
-        $comments = Comment::orderBy('id', 'desc')->get();
+        $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('backend.post.edit', compact('topics', 'posts', 'topicsOfPost', 'comments'));
     }
 

@@ -104,10 +104,10 @@
                                                 <label class="form-check-label" for="InputFile"> Hiển thị lên màn
                                                     hình </label>
                                                 <br>
-                                                <input type="radio" class="form-check-input"  name="status"
+                                                <input type="radio" class="form-check-input" name="status"
                                                        {{$posts->status==1?'checked':''}} value="1">có
                                                 <br>
-                                                <input type="radio" class="form-check-input"  name="status"
+                                                <input type="radio" class="form-check-input" name="status"
                                                        {{$posts->status==0?'checked':''}} value="0">không
                                             </div>
                                             <div class="form-check">
@@ -117,7 +117,7 @@
                                                 <input type="radio" class="form-check-input" name="highlight"
                                                        {{$posts->highlight==1?'checked':''}} value="1">có
                                                 <br>
-                                                <input type="radio" class="form-check-input"  name="highlight"
+                                                <input type="radio" class="form-check-input" name="highlight"
                                                        {{$posts->highlight==0?'checked':''}} value="0">không
                                             </div>
 
@@ -139,14 +139,14 @@
                                                             <label class="form-check-label" for="InputFile"> Hiển thị
                                                                 lên màn hình </label>
                                                             <br>
-                                                            <input type="radio" class="form-check-input  check-input-comment"
+                                                            <input type="radio"
+                                                                   class="form-check-input  check-input-comment"
                                                                    data-id="{{$comment->id}}"
-
                                                                    name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==0?'checked':''}} value="0">không
                                                             <br>
-                                                            <input type="radio" class="form-check-input  check-input-comment"
-
+                                                            <input type="radio"
+                                                                   class="form-check-input  check-input-comment"
                                                                    data-id="{{$comment->id}}"
                                                                    name="status_comment[{{$comment->id}}]"
                                                                    {{$comment->status==1?'checked':''}} value="1">có
@@ -171,6 +171,9 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                        <div class="clearfix">
+                                            {{$comments->links()}}
+                                        </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -192,9 +195,8 @@
 @stop()
 @push('js')
 {{--    <script type="text/javascript">--}}
-
 {{--        var _csrf = '{{csrf_token()}}';--}}
-{{--        $('.check-input-comment').click(function (e){--}}
+{{--        $('.check-input-comment').click(function (e) {--}}
 {{--            e.preventDefault();--}}
 {{--            var id = $(this).data('id');--}}
 {{--            var status = $("[type='radio']:checked").val();--}}
@@ -202,7 +204,6 @@
 {{--            $.ajax({--}}
 {{--                url: "{{route('admin.comment')}}",--}}
 {{--                type: "post",--}}
-{{--                dataType: "json",--}}
 {{--                data: {--}}
 {{--                    status: status,--}}
 {{--                    _token: _csrf,--}}
@@ -212,8 +213,5 @@
 {{--                }--}}
 {{--            })--}}
 {{--        })--}}
-
-
-    </script>
-
+{{--    </script>--}}
 @endpush

@@ -19,12 +19,6 @@ class HomePageController extends Controller
         $this->Post = $post;
 
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
     public function index(Request $request){
         $topics = Topic::whereIn('id',[id_topic_chinh_tri,id_topic_doi_song,id_topic_khoa_hoc])->get();
     //danh sách bài viết chính trị
@@ -41,11 +35,7 @@ class HomePageController extends Controller
             'topics29', 'postOfId29'
         ));
     }
-    /**
-     * Show the form for creating a new resource.
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function detail($slug)
     {
         $post = Post::where('slug', '=', $slug)->with('toTopic')->first();
@@ -55,28 +45,10 @@ class HomePageController extends Controller
         }
         return view('frontend.post_detail', compact( 'post','comment1'));
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
 
         $topics_1 = Topic::where('slug', '=', $slug)->first();
-//        $postOfIds = $topics_1->Post()->where('status', '=', '1')->orderBy('id', 'desc')->get();
-        //xem lại //////////////////////////////////////////////////////////////////////////////
         $postOfIds=[];
         if (!empty($topics_1)) {
             $postOfIds = Post::where('topic', $topics_1->id)->where('status', '=', '1')->orderBy('id', 'desc')->get();
