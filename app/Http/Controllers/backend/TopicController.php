@@ -35,7 +35,7 @@ class TopicController extends Controller
 
     public function store(Request $request)
     {
-        topic::create([
+        Topic::create([
             'name' => $request->InputTitle,
         ]);
 //        dd($request->InputTitle);
@@ -50,13 +50,13 @@ class TopicController extends Controller
 
     public function edit($id)
     {
-        $topic = topic::find($id);
+        $topic = Topic::find($id);
         return view('backend.topic.edit', compact('topic'));
     }
 
     public function update(Request $request, $id)
     {
-        topic::where('id',$id)->update([
+        Topic::where('id',$id)->update([
             'name' => $request->InputTitle,
             'slug' => $request->convert_slug,
         ]);
@@ -65,8 +65,8 @@ class TopicController extends Controller
 
     public function destroy($id)
     {
-        topic::where('id',$id)->delete();
-        post::where('topic', $id)->delete();
+        Topic::where('id',$id)->delete();
+        Post::where('topic', $id)->delete();
         return redirect()->route('admin.topic');
     }
 }

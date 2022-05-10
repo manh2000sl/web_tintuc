@@ -46,7 +46,7 @@ Route::prefix('admin/user')->group(function (){
 
 });
 Route::prefix('admin/role')->group(function (){
-    Route::get('/', [AdminRoleController::class, 'index'])->name('admin.role');
+    Route::get('/', [AdminRoleController::class, 'index'])->name('admin.role')->middleware('can:add_user');
     Route::get('create', [AdminRoleController::class, 'create'])->name('admin.role.create');
     Route::post('store', [AdminRoleController::class, 'store']);
     Route::get('edit/{id}', [AdminRoleController::class, 'edit'])->name('admin.role.edit');

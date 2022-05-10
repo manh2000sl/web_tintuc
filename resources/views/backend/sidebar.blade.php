@@ -130,7 +130,7 @@
                             </ul>
                         </li>
                     @endcan
-
+                    @can('add_user')
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-edit"></i>
@@ -146,7 +146,7 @@
                                         <p>Danh sách quyền hạn</p>
                                     </a>
                                 </li>
-
+                                @endcan
                                 {{--đăng xuất--}}
                                 <li class="nav-item menu-open">
                                     <p>

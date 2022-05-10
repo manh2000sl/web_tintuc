@@ -149,7 +149,6 @@ class DasboardController extends Controller
         $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('backend.post.edit', compact('topics', 'posts', 'topicsOfPost', 'comments'));
     }
-
     public function update(Request $request, $id)
     {
         $post = [
