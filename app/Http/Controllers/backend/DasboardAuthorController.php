@@ -33,8 +33,8 @@ class DasboardAuthorController extends Controller
         }
         $user = $this->user->find($id);
         $posts = $this->post->all();
-        $postOfUser = $user->postUser;
-        return view('backend.post_author.index', compact('posts', 'user', 'postOfUser'));
+        $post_of_user = $user->postUser;
+        return view('backend.post_author.index', compact('posts', 'user', 'post_of_user'));
     }
 
 
@@ -48,7 +48,7 @@ class DasboardAuthorController extends Controller
     public function store(Request $request, $id = 0)
     {
         $post = [
-            'title' => $request->InputTitle,
+            'title' => $request->input_title,
             'slug' => $request->convert_slug,
             'topic' => $request->input_topic,
             'summary' => $request->summernote,
@@ -66,8 +66,8 @@ class DasboardAuthorController extends Controller
         }
         $user = $this->user->find($id);
         $posts = $this->post->all();
-        $postOfUser = $user->postUser;
-        return redirect()->route('admin.author.home', compact('postOfUser'));
+        $post_of_user = $user->postUser;
+        return redirect()->route('admin.author.home', compact('post_of_user'));
     }
 
 
@@ -87,7 +87,7 @@ class DasboardAuthorController extends Controller
     public function update(Request $request, $id)
     {
         $post = [
-            'title' => $request->InputTitle,
+            'title' => $request->input_title,
             'slug' => $request->convert_slug,
             'topic' => $request->input_topic,
             'summary' => $request->summernote,

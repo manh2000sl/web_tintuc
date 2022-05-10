@@ -39,7 +39,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Vai trò</label>
-                                                <input type="text" class="form-control" id="InputTitle" name="name" placeholder="" value="{{$role->name}}">
+                                                <input type="text" class="form-control" id="input_title" name="name" placeholder="" value="{{$role->name}}">
 
                                             </div>
                                             @foreach($permission_parent as $permissionParentItem)

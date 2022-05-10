@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                                 <label for="title">Tiêu đề</label>
                                                 <input type="text" class="form-control" value="{{$posts->title}}"
-                                                       name="InputTitle" id="InputTitle" onkeyup="ChangeToSlug()"
+                                                       name="input_title" id="InputTitle" onkeyup="ChangeToSlug()"
                                                        placeholder="">
                                             </div>
                                             <div class="form-group">
@@ -141,11 +141,13 @@
                                                                 lên màn hình </label>
                                                             <br>
                                                             <input type="radio" class="form-check-input btn_khong"
+                                                                   onchange="approve_comment({{$comment->id}},0)"
                                                                    id="r3-{{$comment->id}}"
                                                                    name="r4[{{$comment->id}}]"
                                                                    {{$comment->status==0?'checked':''}} value="0">không
                                                             <br>
                                                             <input type="radio" class="form-check-input btn_co"
+                                                                   onchange="approve_comment({{$comment->id}},1)"
                                                                    id="r4-{{$comment->id}}"
                                                                    name="r4[{{$comment->id}}]"
                                                                    {{$comment->status==1?'checked':''}} value="1">có
@@ -190,5 +192,32 @@
     </div>
 @stop()
 @push('js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        function approve_comment(comment_id, status) {//status : trang thai public comment 0:Khoong public, 1:public
+            $("body").LoadingOverlay("show");
+            var url = "{{ route('admin.approve_comment') }}"
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "status": status,
+                    "comment_id": comment_id
+                }
+            }).done(function (ketqua) {
+                if (ketqua.status == 1){
+                    alert(ketqua.message)
+                }else {
+                    alert(ketqua.message)
+                }
+                $("body").LoadingOverlay("hide", true);
+            });
+        }
+    </script>
 @endpush

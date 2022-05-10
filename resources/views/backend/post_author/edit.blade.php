@@ -49,7 +49,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Tiêu đề</label>
-                                                <input type="text" class="form-control" value="{{$posts->title}}" name="InputTitle" id="InputTitle" onkeyup="ChangeToSlug()" placeholder="">
+                                                <input type="text" class="form-control" value="{{$posts->title}}" name="input_title" id="InputTitle" onkeyup="ChangeToSlug()" placeholder="">
                                             </div>
                                             <div class="form-group">
                                                 <label>slug</label>

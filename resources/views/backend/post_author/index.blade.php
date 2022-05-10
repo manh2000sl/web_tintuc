@@ -59,7 +59,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($postOfUser as $post)
+                                    @foreach($post_of_user as $post)
 
                                         <tr>
                                             <td>{{$post->id}}</td>

@@ -42,7 +42,7 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         topic::create([
-            'name' => $request->InputTitle,
+            'name' => $request->input_title,
         ]);
 //        dd($request->InputTitle);
 
@@ -68,7 +68,7 @@ class TopicController extends Controller
      */
     public function edit($id)
     {
-        $topic = topic::find($id);
+        $topic = Topic::find($id);
         return view('backend.topic.edit', compact('topic'));
     }
 
@@ -81,8 +81,8 @@ class TopicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        topic::find($id)->update([
-            'name' => $request->InputTitle,
+        Topic::find($id)->update([
+            'name' => $request->input_title,
             'slug' => $request->convert_slug,
         ]);
         return redirect()->route('admin.topic');
@@ -96,8 +96,8 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
-        topic::find($id)->delete();
-        post::where('topic', $id)->delete();
+        Topic::find($id)->delete();
+        Post::where('topic', $id)->delete();
         return redirect()->route('admin.topic');
     }
 }

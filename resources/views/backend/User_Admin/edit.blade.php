@@ -55,7 +55,7 @@
 
                                                     @foreach($roles as $role)
                                                         <option
-                                                            {{$roleOfUser->contains('id',$role->id)? 'selected':''}}
+                                                            {{$role_of_user->contains('id',$role->id)? 'selected':''}}
                                                             value="{{$role->id}}">{{$role->name}}</option>
                                                     @endforeach
                                                 </select>

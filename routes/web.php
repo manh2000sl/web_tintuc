@@ -15,7 +15,7 @@ use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 //trang chính admin
 
-Route::prefix('admin')->group(function (){
+Route::prefix('admin')->middleware('auth')->group(function (){
     Route::get('/', [DasboardController::class, 'index'])->name('admin.home')->middleware('can:add_topic');
     Route::get('/api', [DasboardController::class, 'api'])->name('admin.api');
     Route::get('create', [DasboardController::class, 'create'])->name('admin.create');
@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function (){
     Route::put('update/{id}', [DasboardController::class, 'update'])->name('admin.update');
     Route::delete('destroy/{id}', [DasboardController::class, 'destroy'])->name('admin.destroy');
     Route::get('search', [DasboardController::class, 'search'])->name('admin.search');
+    Route::post('approve_comment', [DasboardController::class, 'approveComment'])->name('admin.approve_comment');
 
 });
 //danh mục

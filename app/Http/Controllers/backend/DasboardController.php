@@ -2,22 +2,13 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Enums\postStatusEnum;
 use App\Http\Controllers\Controller;
-
-use App\Http\Requests\PostAddRequest;
 use App\Models\Comment;
 use App\Models\Topic;
 use App\Models\User;
-
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
 use App\Models\Post;
-use phpDocumentor\Reflection\Element;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -30,7 +21,6 @@ class DasboardController extends Controller
 
     public function __construct(Topic $topic, Post $post, User $user)
     {
-        $this->middleware('auth');
         $this->Topic = $topic;
         $this->Post = $post;
         $this->User = $user;
@@ -93,26 +83,26 @@ class DasboardController extends Controller
     {
         ///////----------Validator--------///////
         $roles = [
-            'InputTitle' => 'bail|required|max:255|min:20',
-            'convert_slug' => 'required',
+            'input_title'       => 'bail|required|max:255|min:20',
+            'convert_slug'     => 'required',
             'exampleInputFile' => 'required',
-            'summernote' => 'required',
-            'summernote2' => 'required',
+            'summernote'       => 'required',
+            'summernote2'      => 'required',
         ];
         $messages = [
-            'required' => ':attribute không được để trống',
-            'max' => ':attribute không được quá 255 kí tự',
-            'min' => ':attribute không được ngắn hơn 20 kí tự',
+            'required'     => ':attribute không được để trống',
+            'max'          => ':attribute không được quá 255 kí tự',
+            'min'          => ':attribute không được ngắn hơn 20 kí tự',
             'unique:posts' => 'Chỉ được chọn 1 :attribute',
 
         ];
         $attributes = [
-            'InputTitle' => 'Tiêu đề',
-            'convert_slug' => 'slug',
-            'input_topic' => 'Danh mục',
+            'input_title'       => 'Tiêu đề',
+            'convert_slug'     => 'slug',
+            'input_topic'      => 'Danh mục',
             'exampleInputFile' => 'Ảnh',
-            'summernote2' => 'Nội dung',
-            'summernote' => 'Tóm tắt',
+            'summernote2'      => 'Nội dung',
+            'summernote'       => 'Tóm tắt',
         ];
         $validator = Validator::make($request->all(), $roles, $messages, $attributes);
         if ($validator->fails()) {
@@ -123,9 +113,9 @@ class DasboardController extends Controller
 
         /////////////////////////////////////////////////
         $post = [
-            'title' => $request->InputTitle,
-            'slug' => $request->convert_slug,
-            'topic' => $request->input_topic,
+            'title'   => $request->input_title,
+            'slug'    => $request->convert_slug,
+            'topic'   => $request->input_topic,
             'summary' => $request->summernote,
             'content' => $request->summernote2,
             'user_id' => auth()->id(),
@@ -137,8 +127,7 @@ class DasboardController extends Controller
             $post['image_path'] = $data['filePath'];
         }
         Post::create($post);
-        $posts = Post::get();
-        return redirect()->route('admin.home', compact('posts'));
+        return redirect()->route('admin.home');
     }
 
     public function edit($id)
@@ -153,12 +142,12 @@ class DasboardController extends Controller
     public function update(Request $request, $id)
     {
         $post = [
-            'title' => $request->InputTitle,
-            'slug' => $request->convert_slug,
-            'topic' => $request->input_topic,
-            'summary' => $request->summernote,
-            'content' => $request->summernote2,
-            'status' => $request->r1,
+            'title'     => $request->input_title,
+            'slug'      => $request->convert_slug,
+            'topic'     => $request->input_topic,
+            'summary'   => $request->summernote,
+            'content'   => $request->summernote2,
+            'status'    => $request->r1,
             'highlight' => $request->r2,
         ];
 
@@ -167,14 +156,13 @@ class DasboardController extends Controller
             $post['image'] = $data['fileName'];
             $post['image_path'] = $data['filePath'];
         }
-        $post1 = Post::find($id);
         if (!empty($request->r4)) {
             //duyệt lấy key và value của request
             foreach ($request->r4 as $comment_id => $comment_status) {
                 $comment_status = [
                     'status' => $comment_status
                 ];
-                Comment::where(['post_id' => $post1->id], ['parent_id' => 0])->where('id', $comment_id)->update($comment_status);
+                Comment::where('id', $comment_id)->update($comment_status);
             }
         }
         $post = Post::find($id)->update($post);
@@ -183,19 +171,29 @@ class DasboardController extends Controller
 
     public function destroy($id)
     {
-        $post = Post::find($id);
-        Comment::where(['post_id' => $post->id])->delete();
-        Post::find($id)->delete();
-        User::where('id', $id)->delete();
-        Topic::where('id', $id)->delete();
+        Comment::where(['post_id' => $id])->delete();
+        Post::where(['id' => $id])->delete();
         return redirect()->route('admin.home');
     }
 
-    public function Search(Request $request)
+    public function approveComment(Request $request)
     {
-        $posts = Post::where('title', 'Like', '%' . $request->table_search . '%')
-            ->orWhere('id', 'Like', '%' . $request->table_search . '%')
-            ->get();
-        return view('backend.post.search', compact('posts'));
+        try {
+            $comment_id = $request->comment_id;
+            $status = $request->status;
+            $comment_status = [
+                'status' => $status
+            ];
+            Comment::where('id', $comment_id)->update($comment_status);
+            return response()->json([
+                'status'  => 1,
+                'message' => "Cập nhật trạng thái thành công"
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status'  => 0,
+                'message' => "Có lỗi xảy ra trong quá trình cập nhật. Vui lòng thử lại sau"
+            ]);
+        }
     }
 }

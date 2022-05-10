@@ -29,7 +29,7 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = $this->user->all();
-        return view('backend.User_Admin.index', compact('users'));
+        return view('backend.user_admin.index', compact('users'));
     }
 
     /**
@@ -40,7 +40,7 @@ class AdminUserController extends Controller
     public function create()
     {
         $roles = $this->role->all();
-        return view('backend.User_Admin.create', compact('roles'));
+        return view('backend.user_admin.create', compact('roles'));
     }
 
     /**
@@ -111,9 +111,9 @@ class AdminUserController extends Controller
     {
         $roles = $this->role->get();
         $user = $this->user->find($id);
-        $roleOfUser = $user->roles;
+        $role_of_user = $user->roles;
 
-        return view('backend.User_Admin.edit', compact('roles', 'user', 'roleOfUser'));
+        return view('backend.user_admin.edit', compact('roles', 'user', 'role_of_user'));
     }
 
     /**

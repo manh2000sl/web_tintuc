@@ -24,7 +24,7 @@ class PostAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'InputTitle' => 'bail|required|max:255|min:20',
+            'input_title' => 'bail|required|max:255|min:20',
             'input_topic' => 'required|unique:posts',
             'exampleInputFile' => 'required',
         ];
@@ -32,9 +32,9 @@ class PostAddRequest extends FormRequest
     public function messages()
     {
         return [
-            'InputTitle.required' => 'Tiêu đề không được để trống',
-            'InputTitle.max' => 'Tiêu đề không được quá 255 kí tự',
-            'InputTitle.min' => 'Tiêu đề không được ngắn hơn 20 kí tự',
+            'input_title.required' => 'Tiêu đề không được để trống',
+            'input_title.max' => 'Tiêu đề không được quá 255 kí tự',
+            'input_title.min' => 'Tiêu đề không được ngắn hơn 20 kí tự',
             'input_topic.required' => 'Danh mục không được để trống',
             'input_topic.unique:posts' => 'Chỉ được chọn 1 danh mục',
             'exampleInputFile.required' => 'Ảnh không được để trống',

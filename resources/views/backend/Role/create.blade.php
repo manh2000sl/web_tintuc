@@ -38,7 +38,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Vai trò</label>
-                                                <input type="text" class="form-control" id="InputTitle" placeholder="" name="name" value="">
+                                                <input type="text" class="form-control" id="input_title" placeholder="" name="name" value="">
 
                                             </div>
                                             @foreach($permission_parent as $permissionParentItem)

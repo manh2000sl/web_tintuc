@@ -44,9 +44,9 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="title">Tiêu đề (<span style="color: red">*</span>)</label>
-                                                <input type="text" class="form-control" name="InputTitle"
-                                                       id="InputTitle" onkeyup="ChangeToSlug()" placeholder="">
-                                                @error('InputTitle')
+                                                <input type="text" class="form-control" name="input_title"
+                                                       id="input_title" onkeyup="ChangeToSlug()" placeholder="">
+                                                @error('input_title')
                                                 <span style="color: red">{{$message}}</span>
                                                 @enderror
                                             </div>
@@ -54,7 +54,7 @@
                                                 <label for="title">slug (<span style="color: red">*</span>)</label>
                                                 <input type="text" class="form-control" name="convert_slug"
                                                        id="convert_slug" placeholder="">
-                                                @error('InputTitle')
+                                                @error('input_title')
                                                 <span style="color: red">{{$message}}</span>
                                                 @enderror
                                             </div>
