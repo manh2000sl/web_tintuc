@@ -132,13 +132,12 @@ class DasboardController extends Controller
 
     public function edit($id)
     {
-        $topics = Topic::all();
+        $topics = Topic::get();
         $posts = Post::find($id);
         $topicsOfPost = $posts->toTopic;
-        $comments = Comment::where(['post_id' => $posts->id])->where(['parent_id' => 0])->orderBy('id', 'desc')->get();
+        $comments = Comment::orderBy('id', 'desc')->paginate(10);
         return view('backend.post.edit', compact('topics', 'posts', 'topicsOfPost', 'comments'));
     }
-
     public function update(Request $request, $id)
     {
         $post = [
@@ -147,34 +146,43 @@ class DasboardController extends Controller
             'topic'     => $request->input_topic,
             'summary'   => $request->summernote,
             'content'   => $request->summernote2,
-            'status'    => $request->r1,
-            'highlight' => $request->r2,
+            'status'    => $request->status,
+            'highlight' => $request->highlight,
         ];
-
         $data = $this->storageTraitUpload($request, 'exampleInputFile', 'post');
         if (!empty($data)) {
             $post['image'] = $data['fileName'];
             $post['image_path'] = $data['filePath'];
         }
-        if (!empty($request->r4)) {
+        if (!empty($request->status_comment)) {
             //duyệt lấy key và value của request
-            foreach ($request->r4 as $comment_id => $comment_status) {
+            foreach ($request->status_comment as $comment_id => $comment_status) {
                 $comment_status = [
                     'status' => $comment_status
                 ];
                 Comment::where('id', $comment_id)->update($comment_status);
             }
         }
-        $post = Post::find($id)->update($post);
+        $post = Post::where('id',$id)->update($post);
         return redirect()->route('admin.home', compact('post'));
     }
 
     public function destroy($id)
     {
         Comment::where(['post_id' => $id])->delete();
-        Post::where(['id' => $id])->delete();
+        Post::where('id',$id)->delete()
         return redirect()->route('admin.home');
     }
+//    public function comment(Request $request, $id)
+//    {
+//        $comments = [
+//            'status' => $request->status1,
+//            ];
+//       $comment = Comment::where('id',$id)->update($comments);
+//
+//       return  view('frontend.list_comment', compact('comment'));
+//    }
+
 
     public function approveComment(Request $request)
     {

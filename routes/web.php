@@ -37,13 +37,6 @@ Route::prefix('admin/topic')->group(function () {
     Route::delete('destroy/{id}', [TopicController::class, 'destroy'])->name('admin.topic.destroy')->middleware('can:delete_topic');
 });
 Auth::routes();
-
-//Route::prefix('admin/author')->group(function (){
-//    Route::get('/', [DasboardController::class, 'index'/*,'middleware'=>'can:user-list'*/])->name('admin.home');
-//    Route::get('create', [DasboardController::class, 'create'])->name('admin.create');
-//    Route::get('edit', [DasboardController::class, 'edit'])->name('admin.edit');
-//});
-//user
 Route::prefix('admin/user')->group(function (){
     Route::get('/', [AdminUserController::class, 'index'])->name('admin.user');
     Route::get('create', [AdminUserController::class, 'create'])->name('admin.user.create')->middleware('can:add_user');
@@ -54,7 +47,7 @@ Route::prefix('admin/user')->group(function (){
 
 });
 Route::prefix('admin/role')->group(function (){
-    Route::get('/', [AdminRoleController::class, 'index'])->name('admin.role');
+    Route::get('/', [AdminRoleController::class, 'index'])->name('admin.role')->middleware('can:add_user');
     Route::get('create', [AdminRoleController::class, 'create'])->name('admin.role.create');
     Route::post('store', [AdminRoleController::class, 'store']);
     Route::get('edit/{id}', [AdminRoleController::class, 'edit'])->name('admin.role.edit');

@@ -33,15 +33,9 @@ class TopicController extends Controller
         return view('backend.topic.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        topic::create([
+        Topic::create([
             'name' => $request->input_title,
         ]);
 //        dd($request->InputTitle);
@@ -49,54 +43,29 @@ class TopicController extends Controller
         return redirect()->route('admin.topic');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $topic = Topic::find($id);
         return view('backend.topic.edit', compact('topic'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        Topic::find($id)->update([
+        Topic::where('id',$id)->update([
             'name' => $request->input_title,
             'slug' => $request->convert_slug,
         ]);
         return redirect()->route('admin.topic');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        Topic::find($id)->delete();
+        Topic::where('id',$id)->delete();
         Post::where('topic', $id)->delete();
         return redirect()->route('admin.topic');
     }
