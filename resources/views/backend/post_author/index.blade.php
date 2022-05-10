@@ -79,34 +79,17 @@
                                             @else
                                                 <td><span class="badge badge-success"> Hiện </span></td>
                                             @endif
-                                            {{--                                        <td></td>--}}
+                                            @if($post->status ==0)
                                             <td> <a class="btn btn-xs btn-primary" role="button" href="{{route('admin.author.edit',['id'=>$post->id])}}"><i class="nav-icon fas fa-edit"></i> Edit</a>
-{{--                                                <form action="{{route('admin.destroy',['id'=>$post->id])}}"--}}
-{{--                                                      method="post" onclick="return confirm('Bạn chắc chắn muốn xóa?')"--}}
-{{--                                                      id="myFunction">--}}
-{{--                                                    @csrf--}}
-{{--                                                    @method('delete')--}}
-{{--                                                    <button type="submit" class="btn  btn-xs btn-danger"><i--}}
-{{--                                                            class="fa-solid fas fa-trash"></i> Delete--}}
-{{--                                                    </button>--}}
+                                            @else
+                                                <td> <p class="btn btn-xs btn-danger" role="button" href="">Không được sửa</p>
+                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-{{--                            <div class="clearfix">--}}
-{{--                                {{$postOfUser->links()}}--}}
-{{--                            </div>--}}
-                            <!-- /.card-body -->
-{{--                            <div class="card-footer clearfix">--}}
-{{--                                <ul class="pagination pagination-md m-0 float-left">--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">«</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="#">»</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
+
                         </div>
                         <!-- /.card -->
                     </div>
