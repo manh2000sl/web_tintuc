@@ -38,18 +38,15 @@ class TopicController extends Controller
         ]);
         return redirect()->route('admin.topic');
     }
-
     public function show($id)
     {
 
     }
-
     public function edit($id)
     {
         $topic = Topic::find($id);
         return view('backend.topic.edit', compact('topic'));
     }
-
     public function update(Request $request, $id)
     {
         Topic::where('id',$id)->update([
@@ -58,7 +55,6 @@ class TopicController extends Controller
         ]);
         return redirect()->route('admin.topic');
     }
-
     public function destroy($id)
     {
         Topic::where('id',$id)->delete();

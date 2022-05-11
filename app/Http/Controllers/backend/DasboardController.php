@@ -75,7 +75,7 @@ class DasboardController extends Controller
 
     public function create()
     {
-        $topics = Topic::all();
+        $topics = Topic::get();
         return view('backend.post.create', compact('topics'));
     }
 
