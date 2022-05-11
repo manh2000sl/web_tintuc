@@ -39,8 +39,6 @@ class DasboardController extends Controller
         }
         return view('backend.post.index');
     }
-
-
     public function api(Request $request)
     {
         if ($request->ajax()) {

@@ -35,6 +35,7 @@ class TopicController extends Controller
     {
         Topic::create([
             'name' => $request->input_title,
+            'slug' => $request->convert_slug,
         ]);
         return redirect()->route('admin.topic');
     }
@@ -53,6 +54,7 @@ class TopicController extends Controller
             'name' => $request->input_title,
             'slug' => $request->convert_slug,
         ]);
+
         return redirect()->route('admin.topic');
     }
     public function destroy($id)

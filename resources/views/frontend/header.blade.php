@@ -55,7 +55,7 @@
 
                 @foreach($menuTop as $topicTop)
                     <li>
-                        <a href="{{route('index.show',['slug'=>$topicTop->slug])}}">{{$topicTop->name}}</a>
+                        <a  href="{{route('index.show',['slug'=>$topicTop->slug])}}">{{$topicTop->name}}</a>
                     </li>
                 @endforeach
 

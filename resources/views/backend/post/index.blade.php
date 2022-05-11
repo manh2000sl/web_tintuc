@@ -116,8 +116,7 @@
                         ordertable: false,
                         searchable: false,
                         render: function (data, type, row, meta) {
-                            return '<a class="btn btn-xs btn-primary" role="button" href="' + data + '"><i class="nav-icon fas fa-edit"></i> Edit </a>';
-                            // return '<a  href="${data}"><i class="nav-icon fas fa-edit"></i> Edit </a>';
+                            return '<a class="btn btn-xs btn-primary"  role="button" href="'+data+'"><i class="nav-icon fas fa-edit" ></i> Edit </a>';
                         }
                     },
                     {
@@ -125,7 +124,7 @@
                         targets: 10,
                         ordertable: false,
                         searchable: false,
-                        render: function (data, type, row, meta) {
+                        render: function (data) {
                             return '<form action="'+ data +'" method="post" "id="myFunction">' +
                                 '@csrf' +
                                 '@method('delete')' +
@@ -136,4 +135,5 @@
             });
         });
     </script>
+
 @endpush
