@@ -79,34 +79,27 @@ class AdminUserController extends Controller
     {
         $roles = Role::get();
         $user = User::find($id);
-        $roleOfUser = $user->roles;
+        $role_of_user = $user->roles;
 
-        return view('backend.User_Admin.edit', compact( 'user', 'roleOfUser','roles'));
+        return view('backend.User_Admin.edit', compact('user', 'role_of_user', 'roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-    }
 
     public function update(Request $request, $id)
     {
-        user::where('id',$id)->update([
+        User::where('id', $id)->update([
             'name' => $request->InputName,
             'password' => Hash::make($request->InputPass),
             'email' => $request->InputEmail,
         ]);
-        $user = user::where('id',$id);
+        $user = User::find($id);
         $user->roles()->sync($request->Role_Id);
         return redirect()->route('admin.user');
     }
 
     public function destroy($id)
     {
-
-        user::where('id',$id);
+        user::where('id', $id);
         return redirect()->route('admin.user');
     }
 }

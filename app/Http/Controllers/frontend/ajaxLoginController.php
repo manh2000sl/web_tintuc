@@ -20,10 +20,10 @@ class ajaxLoginController extends Controller
         $this->User = $user;
     }
 
-    public function login(Request $request, $post)
-    {
-        $check_login = Auth::user()->id;
-    }
+//    public function login(Request $request, $post)
+//    {
+//        $check_login = Auth::user()->id;
+//    }
 
 
     public function comment(Request $request, $post)

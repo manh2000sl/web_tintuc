@@ -110,8 +110,6 @@ class DasboardController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        /////////////////////////////////////////////////
         $post = [
             'title' => $request->input_title,
             'slug' => $request->convert_slug,

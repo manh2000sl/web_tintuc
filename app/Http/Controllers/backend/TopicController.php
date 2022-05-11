@@ -26,8 +26,6 @@ class TopicController extends Controller
         $topics = Topic::orderby('id', 'desc')->get();
         return view('backend.topic.index', compact('topics'));
     }
-
-
     public function create()
     {
         return view('backend.topic.create');
@@ -38,8 +36,6 @@ class TopicController extends Controller
         Topic::create([
             'name' => $request->input_title,
         ]);
-//        dd($request->InputTitle);
-
         return redirect()->route('admin.topic');
     }
 

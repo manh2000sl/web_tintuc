@@ -17,7 +17,6 @@ class HomePageController extends Controller
     {
         $this->Topic = $topic;
         $this->Post = $post;
-
     }
     public function index(Request $request){
         $topics = Topic::whereIn('id',[id_topic_chinh_tri,id_topic_doi_song,id_topic_khoa_hoc])->get();
@@ -35,7 +34,6 @@ class HomePageController extends Controller
             'topic_doi_song', 'post_doi_song'
         ));
     }
-
     public function detail($slug)
     {
         $post = Post::where('slug', '=', $slug)->with('toTopic')->first();

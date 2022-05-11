@@ -97,16 +97,14 @@ class DasboardAuthorController extends Controller
             $post['image'] = $data['fileName'];
             $post['image_path'] = $data['filePath'];
         }
-        post::where('id',$id)->update($post);
-
-
+        Post::find($id)->update($post);
         return redirect()->route('admin.author.home');
     }
 
 
     public function destroy($id)
     {
-        post::where('id', $id)->delete();
+        Post::where('id', $id)->delete();
         return view('backend.post_author.index');
     }
 
