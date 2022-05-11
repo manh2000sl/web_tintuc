@@ -136,7 +136,7 @@ class DasboardController extends Controller
             return redirect()->route('admin.home')->withErrors('Bài viết không tồn tại');
         }
         $topicsOfPost = $posts->toTopic;
-        $comments = Comment::orderBy('id', 'desc')->paginate(10);
+        $comments = Comment::where('id',$id)->orderBy('id', 'desc')->paginate(10);
         return view('backend.post.edit', compact('topics', 'posts', 'topicsOfPost', 'comments'));
     }
 

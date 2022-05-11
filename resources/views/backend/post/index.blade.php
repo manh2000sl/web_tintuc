@@ -35,15 +35,6 @@
                             <div class="card-header">
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        {{--                                        <form role="search" method="get" action="{{route('admin.search')}}">--}}
-                                        {{--                                            <div class="input-group-append">--}}
-                                        {{--                                                <input type="text" name="table_search" class="form-control float-right"--}}
-                                        {{--                                                       placeholder="Search">--}}
-                                        {{--                                                <button type="submit" class="btn btn-default">--}}
-                                        {{--                                                    <i class="fas fa-search"></i>--}}
-                                        {{--                                                </button>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </form>--}}
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +125,7 @@
                         ordertable: false,
                         searchable: false,
                         render: function (data, type, row, meta) {
-                            return '<form action="'+ data +'" method="post" "id="myFunction">' +
+                            return '<form action="'+ data +'" method="post" "id="myFunction" confirm("Press a button!");>' +
                                 '@csrf' +
                                 '@method('delete')' +
                                 '<button type="submit" class="btn  btn-xs btn-danger"><i class="fa-solid fas fa-trash"></i>Delete</button></form>';
