@@ -35,6 +35,7 @@
                             <div class="card-header">
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
+
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +126,7 @@
                         ordertable: false,
                         searchable: false,
                         render: function (data, type, row, meta) {
-                            return '<form action="'+ data +'" method="post" "id="myFunction" confirm("Press a button!");>' +
+                            return '<form action="'+ data +'" method="post" "id="myFunction">' +
                                 '@csrf' +
                                 '@method('delete')' +
                                 '<button type="submit" class="btn  btn-xs btn-danger"><i class="fa-solid fas fa-trash"></i>Delete</button></form>';

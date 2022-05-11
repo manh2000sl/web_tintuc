@@ -75,7 +75,7 @@ class DasboardController extends Controller
 
     public function create()
     {
-        $topics = Topic::get();
+        $topics = Topic::all();
         return view('backend.post.create', compact('topics'));
     }
 
@@ -110,6 +110,7 @@ class DasboardController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+
         $post = [
             'title' => $request->input_title,
             'slug' => $request->convert_slug,
@@ -136,7 +137,7 @@ class DasboardController extends Controller
             return redirect()->route('admin.home')->withErrors('Bài viết không tồn tại');
         }
         $topicsOfPost = $posts->toTopic;
-        $comments = Comment::where('id',$id)->orderBy('id', 'desc')->paginate(10);
+        $comments = Comment::where(['post_id' => $posts->id])->where(['parent_id' => 0])->orderBy('id', 'desc')->paginate(10);
         return view('backend.post.edit', compact('topics', 'posts', 'topicsOfPost', 'comments'));
     }
 
